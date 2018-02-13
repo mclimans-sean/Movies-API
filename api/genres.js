@@ -10,4 +10,10 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+  queries.getAllMoviesByGenre(req.params.id).then(genre => {
+    res.json(genre);
+  });
+});
+
 module.exports = router;
