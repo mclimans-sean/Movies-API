@@ -11,6 +11,22 @@ module.exports = {
       .first();
   },
 
+  create(movie) {
+    return knex('movie').insert(movie, '*');
+  },
+
+  update(id, movie) {
+    return knex('movie')
+      .where('id', id)
+      .update(movie, '*');
+  },
+
+  delete(id) {
+    return knex('movie')
+      .where('id', id)
+      .del();
+  },
+
   getAllGenres() {
     return knex('genre');
   }

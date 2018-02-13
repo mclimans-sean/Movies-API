@@ -522,6 +522,12 @@ const movies = [
   }
 ];
 
+const movie = {
+  id: 167,
+  title: 'The Other Guys (2010)'
+};
+
 module.exports = {
-  movies
+  movies,
+  movie
 };
