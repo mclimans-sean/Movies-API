@@ -4,6 +4,9 @@
 
 * To run locally: npm run dev
 
+* Production link on heroku
+  [https://lfp-movies-api.herokuapp.com/api/v1/movies]
+
 ## Routes - Movies:
 
 ### GET route - List all movies
