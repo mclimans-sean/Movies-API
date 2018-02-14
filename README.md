@@ -2,6 +2,8 @@
 
 ## An API for Movies and their Genres
 
+* To run locally: npm run dev
+
 ## Routes - Movies:
 
 ### GET route - List all movies

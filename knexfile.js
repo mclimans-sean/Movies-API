@@ -8,5 +8,9 @@ module.exports = {
   test: {
     client: 'pg',
     connection: 'postgres://localhost/test-lfp-movies-api'
+  },
+  production: {
+    client: 'pg',
+    connection: process.env.DATABASE_URL
   }
 };
