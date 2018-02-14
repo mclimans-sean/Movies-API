@@ -3,16 +3,30 @@ const knex = require('./knex');
 module.exports = {
   getAllMovies() {
     return knex('movie');
-    // .select('movie.id', 'title', ' name')
-    // .from('movie')
-    // .join('movie_genre', 'movie_id', 'movie.id')
-    // .join('genre', 'genre_id', 'genre.id');
   },
 
   getOneMovie(id) {
-    return knex('movie')
-      .where('id', id)
-      .first();
+    function getMovie(id) {
+      return knex('movie')
+        .where('id', id)
+        .first();
+    }
+    function getGenresForMovies(movieId) {
+      return knex('genre')
+        .select('name')
+        .join('movie_genre', 'genre_id', 'genre.id')
+        .where('movie_id', movieId);
+    }
+    function getMovieWithGenres(movieId) {
+      return Promise.all([getMovie(movieId), getGenresForMovies(movieId)]).then(
+        function(results) {
+          let [movie, genre] = results;
+          movie.genre = genre;
+          return movie;
+        }
+      );
+    }
+    return getMovieWithGenres(id);
   },
 
   create(movie) {
