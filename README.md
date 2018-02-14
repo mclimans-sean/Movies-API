@@ -39,8 +39,7 @@
 * /api/v1/movies
 * Structure example:
 * {
-  "id": 151,
-  "name": "The Others Guys (2010)"
+  "title": "The Others Guys (2010)"
   }
 
 ### PUT route - Update a movie

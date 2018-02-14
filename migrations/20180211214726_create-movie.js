@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('movie', table => {
-    table.increments('id').primary();
+    table.increments();
     table.text('title');
   });
 };

@@ -16,7 +16,6 @@ module.exports = {
 
       return movies.map(movie => {
         movie.genres = groupedGenres[movie.id] || [];
-        console.log(movie);
         return movie;
       });
     }
@@ -33,8 +32,9 @@ module.exports = {
 
     function getMoviesWithGenres() {
       return getMovies().then(movies => {
-        return Promise.all([getGenresForAllMovies(movies)]).then(results => {
-          populateMovies(movies, ...results);
+        return getGenresForAllMovies(movies).then(genres => {
+          populateMovies(movies, genres);
+          return movies;
         });
       });
     }
@@ -92,5 +92,23 @@ module.exports = {
       .where('genre_id', id)
       .join('movie_genre', 'genre_id', 'genre.id')
       .join('movie', 'movie_id', 'movie.id');
+  },
+
+  addGenre(id) {
+    return knex('movie')
+      .where('id', id)
+      .first()
+      .then(movie => {
+        if (!movie) {
+          const err = new Error('movie does not exist');
+          err.status = 400;
+          throw err;
+        }
+      });
+    return knex('genre').where('name', name);
+    return knex('movie_genre').insert({
+      movie_id: id,
+      genre_id: genre.id
+    });
   }
 };
