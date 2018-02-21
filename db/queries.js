@@ -66,7 +66,32 @@ module.exports = {
   },
 
   create(movie) {
-    return knex('movie').insert(movie, '*');
+    if (!Array.isArray(movie.genre)) {
+      movie.genre = [movie.genre];
+    }
+    return knex('movie')
+      .insert({
+        title: movie.title
+      })
+      .returning('id')
+      .then(movieId => {
+        let genreIds = movie.genre;
+        let genrePromises = genreIds.map(id => {
+          return knex('genre')
+            .select('genre.id', 'name')
+            .where('id', id)
+            .returning('id');
+        });
+        return Promise.all(genrePromises).then(ids => {
+          let moviesObject = ids.map(id => {
+            return {
+              movie_id: movieId[0],
+              genre_id: id[0].id
+            };
+          });
+          return knex('movie_genre').insert(moviesObject);
+        });
+      });
   },
 
   update(id, movie) {
@@ -92,23 +117,5 @@ module.exports = {
       .where('genre_id', id)
       .join('movie_genre', 'genre_id', 'genre.id')
       .join('movie', 'movie_id', 'movie.id');
-  },
-
-  addGenre(id) {
-    return knex('movie')
-      .where('id', id)
-      .first()
-      .then(movie => {
-        if (!movie) {
-          const err = new Error('movie does not exist');
-          err.status = 400;
-          throw err;
-        }
-      });
-    return knex('genre').where('name', name);
-    return knex('movie_genre').insert({
-      movie_id: id,
-      genre_id: genre.id
-    });
   }
 };

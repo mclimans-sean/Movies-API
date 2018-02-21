@@ -40,9 +40,10 @@
 ### POST route - add a movie
 
 * /api/v1/movies
-* Structure example:
+* Structure example (Movie Title + Genre ID's):
 * {
   "title": "The Others Guys (2010)"
+  "genre": [1, 5]
   }
 
 ### PUT route - Update a movie
