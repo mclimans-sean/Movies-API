@@ -71,7 +71,8 @@ module.exports = {
     }
     return knex('movie')
       .insert({
-        title: movie.title
+        title: movie.title,
+        year: movie.year
       })
       .returning('id')
       .then(movieId => {
