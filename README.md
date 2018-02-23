@@ -20,7 +20,8 @@
 * returns:
 * {
   "id": 10,
-  "title": "GoldenEye (1995)",
+  "title": "GoldenEye",
+  "year": 1995
   "genre": [
   {
   "id": 1,
@@ -42,7 +43,8 @@
 * /api/v1/movies
 * Structure example (Movie Title + Genre ID's):
 * {
-  "title": "The Others Guys (2010)"
+  "title": "The Others Guys",
+  "year": 2010
   "genre": [1, 5]
   }
 
