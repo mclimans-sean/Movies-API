@@ -41,9 +41,9 @@
 ### POST route - add a movie
 
 * /api/v1/movies
-* Structure example (Movie Title + Genre ID's):
+* Structure example (Movie Title, Movie Year + Genre ID's):
 * {
-  "title": "The Others Guys",
+  "title": "The Other Guys",
   "year": 2010
   "genre": [1, 5]
   }
