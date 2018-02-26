@@ -33,17 +33,11 @@ router.get('/:id', isValidId, (req, res, next) => {
 router.post('/', (req, res, next) => {
   if (validMovie(req.body)) {
     queries.create(req.body).then(movies => {
-      res.json(movies[0]);
+      res.json(movies);
     });
   } else {
     next(new Error('Invalid Movie'));
   }
-});
-
-router.post('/:id/genre', isValidId, (req, res) => {
-  queries.addGenre(req.body).then(genre => {
-    res.json(genre);
-  });
 });
 
 router.put('/:id', isValidId, (req, res, next) => {

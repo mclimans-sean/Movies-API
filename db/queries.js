@@ -27,7 +27,7 @@ module.exports = {
     }
 
     function getMovies() {
-      return knex('movie');
+      return knex('movie').orderBy('id');
     }
 
     function getMoviesWithGenres() {
